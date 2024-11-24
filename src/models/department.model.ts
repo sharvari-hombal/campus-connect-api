@@ -38,7 +38,7 @@ export class Department extends Entity {
   name: string;
 
   @property({
-    type: 'string',
+    type: 'text',
   })
   description?: string;
 

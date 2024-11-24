@@ -1,4 +1,4 @@
-import {Entity, model, property, belongsTo} from '@loopback/repository';
+import {belongsTo, Entity, model, property} from '@loopback/repository';
 import {Semester} from './semester.model';
 
 @model()
@@ -45,7 +45,7 @@ export class Subject extends Entity {
   code: string;
 
   @property({
-    type: 'string',
+    type: 'text',
   })
   description?: string;
 
