@@ -22,13 +22,13 @@ services:
       retries: 5
 
   keycloak:
-    image: quay.io/keycloak/keycloak:latest
+    image: quay.io/keycloak/keycloak:22.0.3
     entrypoint: [ "/opt/keycloak/bin/kc.sh", "start-dev" ]
     ports:
       - 8080:8080
     environment:
-      KC_BOOTSTRAP_ADMIN_USERNAME: ajja
-      KC_BOOTSTRAP_ADMIN_PASSWORD: changeforproduction
+      KEYCLOAK_ADMIN: ajja
+      KEYCLOAK_ADMIN_PASSWORD: changeforproduction
       KC_DB: mysql
       KC_DB_URL: jdbc:mysql://db:3306/keycloak
       KC_DB_USERNAME: ajja
