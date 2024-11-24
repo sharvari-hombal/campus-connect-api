@@ -1,0 +1,3 @@
+CREATE DATABASE keycloak;
+GRANT ALL PRIVILEGES ON keycloak.* TO 'ajja'@'%';
+FLUSH PRIVILEGES;

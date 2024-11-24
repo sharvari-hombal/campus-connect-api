@@ -1,0 +1,41 @@
+version: "3.9"
+
+services:
+  db:
+    image: mysql:latest
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: changeforproduction
+      MYSQL_DATABASE: campus_connect
+      MYSQL_USER: ajja
+      MYSQL_PASSWORD: changeforproduction
+    volumes:
+      # Mount init scripts
+      - ./scripts/init.sql:/docker-entrypoint-initdb.d/init.sql
+      # Persist data
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "ajja", "-pchangeforproduction" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:latest
+    entrypoint: [ "/opt/keycloak/bin/kc.sh", "start-dev" ]
+    ports:
+      - 8080:8080
+    environment:
+      KC_BOOTSTRAP_ADMIN_USERNAME: ajja
+      KC_BOOTSTRAP_ADMIN_PASSWORD: changeforproduction
+      KC_DB: mysql
+      KC_DB_URL: jdbc:mysql://db:3306/keycloak
+      KC_DB_USERNAME: ajja
+      KC_DB_PASSWORD: changeforproduction
+      KC_DB_HOSTNAME: db
+    depends_on:
+      - db
+
+volumes:
+  mysql_data:
