@@ -1,6 +1,6 @@
 {
   "@loopback/cli": {
-    "packageManager": "npm",
-    "version": "6.1.2"
+    "packageManager": "pnpm",
+    "version": "9.14.2"
   }
 }
